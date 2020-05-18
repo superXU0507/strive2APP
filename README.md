@@ -1,4 +1,7 @@
-# shuang-zheng
+# 考评系统
+```
+vue+django前后端分离，strive2web中为后端程序文件，其余为前端。
+```
 
 ## Project setup
 ```
