@@ -9,18 +9,16 @@
         <v-container fluid>
           <v-row>
             <v-col :cols="12">
-              <v-card
+              <div
                 max-width="700"
-                outlined
               >
-                  <v-img
-                    class="white--text align-end" 
-                    src="@/assets/img3.jpg"
+                  <v-img   
+                    src="@/assets/351.png"
                   >
-                    <v-card-title>边防第三五一团</v-card-title>
+                    <!--  class="white--text align-end" <v-card-title>边防第三五一团</v-card-title> -->
                     <!-- <v-card-subtitle>人民解放军77643部队</v-card-subtitle> -->
                   </v-img>
-              </v-card>
+              </div>
             </v-col>
           </v-row>
         </v-container>
@@ -67,7 +65,7 @@
       :clipped-left="$vuetify.breakpoint.lgAndUp"
       app
       fixed
-      color="blue darken-3"
+      color="red"
       dark
       shrink-on-scroll
       prominent
@@ -85,14 +83,14 @@
         <v-icon>mdi-logout</v-icon>
       </v-btn>
       <v-btn icon v-else @click="logIn()">
-        <v-icon>mdi-login</v-icon>
+        <v-icon>mdi-login</v-icon>        
       </v-btn>
       <v-avatar v-show="user.userImg">
         <!-- <v-icon dark>mdi-account-circle</v-icon> -->
         <img :src="user.userImg" :alt="user.unitName" />
       </v-avatar>
-      {{user.unitName}}
       <!-- </v-chip> -->
+      {{user.unitName}}
     </v-app-bar>
   </div>
 </template>

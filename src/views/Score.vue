@@ -10,6 +10,7 @@
           type="month"
           class="mt-4"
           locale="zh-cn"
+          color="red"
         ></v-date-picker>
       </v-col>
     </v-row>
@@ -19,7 +20,7 @@
       :transition="transition"
     >
       <v-list shaped two-line>
-        <v-list-item-group color="primary">
+        <v-list-item-group color="red">
           <v-list-item v-for="(item, i) in score_items" :key="i" v-show="item.isShow">
             <v-list-item-content>
               <v-list-item-title>
@@ -121,7 +122,7 @@
                 empty-icon="$ratingFull"
                 hover
                 :small="item.max_score>7"
-                color="blue"
+                color="red"
                 @input="updateProgress"
                 :readonly="actionType"
                 clearable
@@ -133,7 +134,6 @@
                 placeholder=""
                 outlined
                 :readonly="actionType"
-                :update:error="hasError"
               ></v-text-field>
               <!-- <v-rating v-else-if="item.detail_cate==='即时性工作(扣分)'"
                 class="text-wrap"
@@ -156,7 +156,7 @@
     </v-skeleton-loader>
     <v-row>
       <v-col class="text-center">
-        <v-btn v-show="!loading" large color="primary" @click="handleDialog">提交</v-btn>
+        <v-btn v-show="!loading" large color="red" dark @click="handleDialog">提交</v-btn>
         <v-dialog v-model="dialog" persistent max-width="290">
           <v-card>
             <v-card-title class="headline">还有未打分的项，是否离开页面</v-card-title>
@@ -195,7 +195,7 @@
     </v-snackbar>
     <v-progress-linear
       v-model="rated_progress"
-      color="light-blue"
+      color="light-red"
       value="45"
       rounded
       striped
@@ -254,10 +254,6 @@ export default {
     }
   },
   methods: {
-    test(){
-      console.log("fff")
-      this.dialog = true
-    },
     isAllowedDates() {
       return val => this.allowedDates.indexOf(val) > -1;
     },
@@ -367,7 +363,6 @@ export default {
       this.score_items = this.score_items.map(item => {
         //生成多条件筛选的bool对象（如f1&&f2&&f3...）
         let filters = this.typeIndexs.reduce((acc, cur) => {
-          console.log(item[types[cur]], this.vals[cur]);
           return acc && item[types[cur]] === this.vals[cur];
         }, true);
         if (filters) item.isShow = true;
@@ -383,7 +378,6 @@ export default {
   watch: {
     //响应路由参数变化以便重新请求数据
     $route(to, from) {
-      console.log(to, from)
       if(to.query.cat!==from.query.cat){
         this.cat = this.$route.query.cat
       }

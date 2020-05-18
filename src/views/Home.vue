@@ -26,7 +26,10 @@
             >
               <v-card-title><b>欢迎, {{ this.$store.state.user.unitName }}</b></v-card-title>
               <v-card-text><p>贵单位本季度“双争”考评排名为:</p>
-                           <p><b>{{this.$store.state.user.cate}}</b>第<b>{{this.selfRank[0]}}</b>名。</p>
+                           <p v-if="this.selfRank.length===1"><b>{{this.$store.state.user.cate}}</b> 第<b>{{this.selfRank[0]}}</b>名</p>
+                           <p v-else-if="this.selfRank[0]>this.selfRank[1]"><b>{{this.$store.state.user.cate}}</b> 第<b>{{this.selfRank[0]}}</b>名, 较上季度退步{{this.selfRank[0]-this.selfRank[1]}}名</p>              
+                           <p v-else-if="this.selfRank[0]<this.selfRank[1]"><b>{{this.$store.state.user.cate}}</b> 第<b>{{this.selfRank[0]}}</b>名, 较上季度进步{{this.selfRank[1]-this.selfRank[0]}}名</p>              
+                           <p v-else-if="this.selfRank[0]===this.selfRank[1]"><b>{{this.$store.state.user.cate}}</b> 第<b>{{this.selfRank[0]}}</b>名, 较上季度排名无变化</p>              
               </v-card-text>
             </v-card>
             <v-alert
@@ -101,8 +104,6 @@ export default {
     basisevaluate: [],
     leaderevaluate: [],
     other: [],
-    // seasonScore:[11, 11, 15, 13],
-    // faithScore_basis:[1, -2, 2, 5],
   }),
   computed: {
     loginState() {
@@ -110,7 +111,7 @@ export default {
     },
     fullDate() {
       let a = this.updateTime;
-      if (a.length > 1) {
+      if (a[0]==='yyyy-mm-dd HH:MM' && a.length>1) {
         a.shift()
         return a[0].split(" ")[0].replace(/(\d{4})-(\d{2})-(\d{2})/g,'$1年$2月$3日')
       } else {
@@ -119,7 +120,7 @@ export default {
     },
     fullTime() {
       let a = this.updateTime;
-      if (a.length > 1) {
+      if (a[0]==='yyyy-mm-dd HH:MM' && a.length>1) {
         a.shift()
         return a[0].split(" ")[1].replace(/(\d{2}):(\d{2})/g,'$1时$2分')
       } else {

@@ -1,6 +1,6 @@
 <template>
   <v-container style="background: #E0E0E0">
-    <v-row dense>
+    <v-row no-gutters>
       <v-col :cols="12">
         <v-card :style="{height:'450px'}">
           <v-card-title>{{this.year}}年 第{{this.season}}季度 {{this.unitCate}} 排名情况柱状图</v-card-title>
@@ -60,10 +60,10 @@ export default {
           sortable: false,
           value: "unitName"
         },
-        { text: "铁一般信仰", value: "totalBelief" },
-        { text: "铁一般信念", value: "tottalFaith" },
-        { text: "铁一般纪律", value: "totalDiscipline" },
-        { text: "铁一般担当", value: "totalResponsible" },
+        { text: "铁一般信仰(自查/机关)", value: "totalBelief" },
+        { text: "铁一般信念(自查/机关)", value: "tottalFaith" },
+        { text: "铁一般纪律(自查/机关)", value: "totalDiscipline" },
+        { text: "铁一般担当(自查/机关)", value: "totalResponsible" },
         { text: "专项检查", value: "totalSpecial" },
         { text: "综合检查", value: "totalComprenhensive" },
         { text: "阶段加分", value: "totalOther" },
@@ -170,10 +170,10 @@ export default {
             sortable: false,
             value: "unitName"
           },
-          { text: "铁一般信仰", value: "totalBelief" },
-          { text: "铁一般信念", value: "tottalFaith" },
-          { text: "铁一般纪律", value: "totalDiscipline" },
-          { text: "铁一般担当", value: "totalResponsible" },
+          { text: "铁一般信仰(自查/机关)", value: "totalBelief" },
+          { text: "铁一般信念(自查/机关)", value: "tottalFaith" },
+          { text: "铁一般纪律(自查/机关)", value: "totalDiscipline" },
+          { text: "铁一般担当(自查/机关)", value: "totalResponsible" },
           { text: "专项检查", value: "totalSpecial" },
           { text: "综合检查", value: "totalComprenhensive" },
           { text: "阶段加分", value: "totalOther" },

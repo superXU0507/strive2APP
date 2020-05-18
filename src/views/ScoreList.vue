@@ -9,7 +9,7 @@
               :items="unitNames"
               :rules="rules"
               color="white"
-              label="单位"
+              label="请选择单位新增评分记录"
               auto-select-first
             ></v-autocomplete>
           </v-form>
@@ -73,22 +73,8 @@
               <span>查看</span>
             </v-tooltip>
           </v-list-item-action>
-          <!-- <v-list-item-action>
-            <v-tooltip top>
-              <template v-slot:activator="{ on }">
-                <v-btn icon>
-                  <v-icon
-                    color="green"
-                    v-on="on"
-                    @click="getScoreItems(score.unitName, '')"
-                  >mdi-plus-circle-outline</v-icon>
-                </v-btn>
-              </template>
-              <span>添加</span>
-            </v-tooltip>
-          </v-list-item-action> -->
           <v-list-item-action>
-            <v-tooltip top>
+            <v-tooltip v-if="isQuarterMonths(score.date)" top>
               <template v-slot:activator="{ on }">
                 <!-- <v-btn v-if="isQuarterMonths(score.date)" icon> -->
                 <v-btn icon>
@@ -101,17 +87,17 @@
               </template>
               <span>修改</span>
             </v-tooltip>
-            <!-- <v-tooltip v-else top>
+            <v-tooltip v-else top>
               <template v-slot:activator="{ on }">
                 <v-btn icon>
                   <v-icon color="grey" v-on="on">mdi-pencil</v-icon>
                 </v-btn>
               </template>
-              <span>您无法修改上个季度的评测结果</span>
-            </v-tooltip>-->
+              <span>您无法修改之前季度的评测结果</span>
+            </v-tooltip>
           </v-list-item-action>
         </v-list-item>
-        <v-divider class="mx-4" inset v-show="score.isShow"></v-divider>
+        <v-divider :key="score.id"></v-divider>
       </template>
     </v-list>
   </v-container>
@@ -142,16 +128,16 @@ export default {
   methods: {
     validate() {
       if (this.$refs.form.validate())
-        this.getScoreItems(this.unitName, "", [
-          "2020-01",
-          "2020-02",
-          "2020-03",
-          "2020-04",
-          "2020-05",
-          "2020-06",
-          "2020-12"
-        ]);
-      // this.getScoreItems(this.unitName, '', this.getQuarterMonths())
+        // this.getScoreItems(this.unitName, "", [
+        //   "2020-01",
+        //   "2020-02",
+        //   "2020-03",
+        //   "2020-04",
+        //   "2020-05",
+        //   "2020-06",
+        //   "2020-12"
+        // ]);
+      this.getScoreItems(this.unitName, '', this.getQuarterMonths())
     },
     //返回当前月份所处的季度的所有月份
     getQuarterMonths() {
